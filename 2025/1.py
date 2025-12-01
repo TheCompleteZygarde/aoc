@@ -6,6 +6,18 @@ pw = 0
 c = 50
 for line in data:
     if line[0]=='L':
+        c-=int(line[1:])
+    else:
+        c+=int(line[1:])
+    c%=100
+    if c==0:
+        pw+=1
+print(pw)
+
+pw = 0
+c = 50
+for line in data:
+    if line[0]=='L':
         if c==0:
             pw-=1
         c -=int(line[1:])
