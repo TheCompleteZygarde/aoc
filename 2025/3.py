@@ -2,7 +2,7 @@ data = ""
 with open("input_day3.txt", "r") as file:
     data = file.readlines()
 
-#data = ["987654321111111", "811111111111119","234234234234278","818181911112111"]
+#data = ["987654321111111\n", "811111111111119\n","234234234234278\n","818181911112111\n"]
 pw = 0
 for line in data:
     c1 = "0"
@@ -23,15 +23,13 @@ print(pw)
 pw = 0
 for line in data:
     line = line.strip()
-    print(line)
-    out = line[0:12]
-    print(out)
+    out = "000000000000"
     for i in range(len(line)):
-        n = len(line)-i
-        if n > 12:
-            n = 12
-        if line[i]>out[12-n]:
-            out = out[:12-n] + line[i:i+n+1]
-            print(out)
+        for n in range(0, 12):
+            if 12-n + i > len(line):
+                continue
+            if line[i]>out[n]:
+                out = out[:n] + line[i] + "0"*(11-n)
+                break
     pw+=int(out)
 print(pw)
