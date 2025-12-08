@@ -1,4 +1,3 @@
-data = ""
 with open("input_day5.txt", "r") as file:
     data = file.readlines()
 
@@ -22,6 +21,11 @@ for line in data:
                     elif ranges[r1][0]<=ranges[r2][1] and ranges[r2][1]<=ranges[r1][1]:
                         if ranges[r1][0] > ranges[r2][0]:
                             ranges[r1][0] = ranges[r2][0]
+                        ranges.remove(ranges[r2])
+                        r2 = r1+1
+                        continue
+                    elif ranges[r1][0]>=ranges[r2][0] and ranges[r1][1]<=ranges[r2][1]:
+                        ranges[r1] = ranges[r2]
                         ranges.remove(ranges[r2])
                         r2 = r1+1
                         continue
