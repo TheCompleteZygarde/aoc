@@ -1,4 +1,3 @@
-data = ""
 with open("input_day2.txt", "r") as file:
     data = file.readline().split(',')
 
@@ -21,13 +20,7 @@ for line in data:
         for n in range(1, len(str(s))//2 +1):
             if len(s)%n:
                 continue
-            l = [s[a:a+n] for a in range(0, len(s), n)]
-            check = True
-            for a in l[1:]:
-                if a != l[0]:
-                    check = False
-                    break
-            if check:
-                pw += i
+            if s[0:n]*(len(s)//n) == s:
+                pw+=i
                 break
 print(pw)
