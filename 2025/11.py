@@ -1,3 +1,4 @@
+from functools import cache
 with open("input_day11.txt", "r") as file:
     data = file.readlines()
 
@@ -19,14 +20,21 @@ def rec(current, visited):
 
 print(rec('you', {'you'}))
 
-def rec2(current, visited):
-    if current == 'out':
-        return 'dac' in visited and 'fft' in visited
+@cache
+def rec2(current, goal):
+    if current == goal:
+        return 1
+    if current not in connections:
+        return 0
     ret = 0
     for node in connections[current]:
-        if node in visited:
-            continue
-        ret += rec2(node, visited | {node})
+        ret += rec2(node, goal)
     return ret
 
-print(rec2('svr', {'svr'}))
+svrfft = rec2('svr', 'fft')
+print(svrfft)
+fftdac = rec2('fft', 'dac')
+print(fftdac)
+dacout = rec2('dac', 'out')
+print(dacout)
+print(svrfft * fftdac * dacout)
